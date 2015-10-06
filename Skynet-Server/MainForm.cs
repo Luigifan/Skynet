@@ -20,19 +20,7 @@ namespace Skynet_Server
 		{
 			InitializeComponent();
 			
-			SkynetServer.StoppedServer += (e) =>
-			{
-				serverStatusLabel.ForeColor = Color.Red;
-				serverStatusLabel.Text = "Server stopped, check log";
-				Program.Log.Insert(DateTime.Now.ToString(), "Server stopped. Code: " + e.Code + "; Reason: " + e.Reason);
-			};
 			
-			SkynetServer.StartedServer += () =>
-			{
-				serverStatusLabel.ForeColor = Color.Green;
-				serverStatusLabel.Text = "Server started! Point Skynet Client to: ws://localhost:" + SkynetServer.SettingsCopy.LocalServerPort + "/Skynet";
-				Program.Log.Insert(DateTime.Now.ToString(), "Server started; running on: ws://localhost:" + SkynetServer.SettingsCopy.LocalServerPort + "/Skynet");
-			};
 		}
 		void StartStopButtonClick(object sender, EventArgs e)
 		{
@@ -41,7 +29,22 @@ namespace Skynet_Server
 				Program.Log.Insert(DateTime.Now.ToString(), "Starting server...");
 			
 				SkynetServer = new SkynetServer(serverSettings);
-				SkynetServer.Start();
+
+                SkynetServer.StoppedServer += (ee) =>
+                {
+                    serverStatusLabel.ForeColor = Color.Red;
+                    serverStatusLabel.Text = "Server stopped, check log";
+                    Program.Log.Insert(DateTime.Now.ToString(), "Server stopped. Code: " + ee.Code + "; Reason: " + ee.Reason);
+                };
+
+                SkynetServer.StartedServer += () =>
+                {
+                    serverStatusLabel.ForeColor = Color.Green;
+                    serverStatusLabel.Text = "Server started! Point Skynet Client to: ws://localhost:" + SkynetServer.SettingsCopy.LocalServerPort + "/Skynet";
+                    Program.Log.Insert(DateTime.Now.ToString(), "Server started; running on: ws://localhost:" + SkynetServer.SettingsCopy.LocalServerPort + "/Skynet");
+                };
+
+                SkynetServer.Start();
 				serverStatusLabel.ForeColor = Color.Green;
 				serverStatusLabel.Text = "Server running!";
 				startStopButton.Text = "Stop";

@@ -26,8 +26,10 @@ namespace Skynet
 		/// 
 		
 		static WebSocket ws = new WebSocket("ws://localhost:4649/Skynet");
-		[STAThread]
-		private static void Main(string[] args)
+		
+        static int counter = 0;
+        [STAThread]
+        private static void Main(string[] args)
 		{
 			//Application.EnableVisualStyles();
 			//Application.SetCompatibleTextRenderingDefault(false);
@@ -38,16 +40,24 @@ namespace Skynet
 					if(e.Type == Opcode.Text)
 					{
 						string data = e.Data;
-						Console.WriteLine(e.Data);
+						//Console.WriteLine(e.Data);
 						JObject json = JObject.Parse(e.Data);
-						Conversions.FromBase64(json["image"].ToString()).Save("test.png");
+						Conversions.FromBase64(json["image"].ToString()).Save("test" + counter + ".png");
 					}
 				};
 				
 				ws.Connect();
-				Console.WriteLine("<- GETSHOT");
-				ws.Send("GETSHOT");
-				Application.Run();
+
+            do
+            {
+                Console.WriteLine("<- GETSHOT ({0})", counter);
+                ws.Send("GETSHOT");
+                counter++;
+                Thread.Sleep(5000);
+                
+            } while (counter < 100);
+
+            Console.ReadLine();
 		}
 		
 	}
