@@ -26,7 +26,7 @@ namespace Skynet
             ws = new WebSocket(address);
 
             timer = new System.Windows.Forms.Timer();
-            timer.Interval = 1000;
+            timer.Interval = 1500;
             timer.Tick += (sender, e) =>
             {
                 ws.Send(JsonConvert.SerializeObject(new { type = "getframe" }));

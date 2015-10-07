@@ -51,8 +51,10 @@ namespace Skynet_Server
                 JObject msgAsJson = JObject.Parse(e.Data);
                 if(msgAsJson["type"].ToString() == "notice")
                 {
-                    Program.mainForm.SendNotice(msgAsJson["message"].ToString(), msgAsJson["timeout"].ToObject<int>());
+                    Program.mainForm.SendNotice(msgAsJson["message"].ToString(), msgAsJson["timeout"].ToObject<int>() == 0 ? 5000 : msgAsJson["timeout"].ToObject<int>());
                     Program.Log.Insert(DateTime.Now.ToString(), "Received notice by JSON");
+                    Program.Log.Insert(DateTime.Now.ToString(), "  Message: " + msgAsJson["message"].ToString());
+                    Program.Log.Insert(DateTime.Now.ToString(), "  Timeout: " + msgAsJson["timeout"].ToString() + "ms");
                 }
                 else if(msgAsJson["type"].ToString() == "getframe")
                 {
