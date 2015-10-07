@@ -117,35 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>130, 17</value>
-  </metadata>
-  <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAABMLAAATCwAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAACgoKP8oKCj/KCgo/ygoKP8oKCj/KCgo/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAcCgn/JiYm/ygoKP8oKCj/m5yY/76/uv++v7r/m5yY/05OTP8mJib/JiYm/wAA
-        AAAAAAAAAAAAAAAAAAAAAAAAHAoJ/1paWv8oKCj/Wlpa/1paWv9aWlr/Wlpa/1paWv8mJib/m5yY/xwK
-        Cf8AAAAAAAAAAAAAAAAAAAAAAAAAABwKCf9aWlr/JiYm/xwKCf8cCgn/HAoJ/xwKCf8cCgn/JiYm/1pa
-        Wv8cCgn/AAAAAAAAAAAAAAAAAAAAABwKCf8cCgn/HAoJ/yYmJv+bnJj/m5yY/5ucmP/Z2tX/2drV/yYm
-        Jv8cCgn/JiYm/xwKCf8AAAAAAAAAAAAAAAAcCgn/HAoJ/xwKCf8mJib/8fLs/yYmJv8mJib/JiYm/9na
-        1f8mJib/HAoJ/yYmJv8mJib/AAAAAAAAAAAAAAAAHAoJ/1paWv+bnJj/8fLs//Hy7P+bnJj/JiYm/5uc
-        mP/x8uz/8fLs//Hy7P9aWlr/MDAw/wAAAAAAAAAAAAAAABwKCf+bnJj/JiYm/xoJHP8IFY7/Ggka/5uc
-        mP8mJib/GwoS/wgVj/8ZCR3/m5yY/zAwMP8AAAAAAAAAAAAAAAAwMDD/m5yY/yYmJv8KGYD/AADP/wgV
-        j/+bnJj/JiYm/wgVj/8AAM//BxKX/5ucmP8wMDD/AAAAAAAAAAAAAAAAMDAw/5ucmP8mJib/HAoJ/wob
-        e/8bChT/m5yY/yYmJv8cCgn/CRaK/xoKFv/Z2tX/MDAw/wAAAAAAAAAAAAAAADAwMP9aWlr/m5yY/9na
-        1f/Z2tX/vr+6/1paWv+bnJj/m5yY/9na1f/Z2tX/Wlpa/zAwMP8AAAAAAAAAAAAAAAAwMDD/Tk5M/1pa
-        Wv9aWlr/Wlpa/1paWv+bnJj/Wlpa/1paWv9aWlr/Wlpa/1paWv8wMDD/AAAAAAAAAAAAAAAAJiYm/1pa
-        Wv+vr6//m5yY/5ucmP/Z2tX/vr+6/9na1f/Z2tX/8fLs//Hy7P+UlZH/MDAw/wAAAAAAAAAAAAAAAAAA
-        AAAwMDD/Wlpa/5ucmP+bnJj/m5yY/9na1f/Z2tX/8fLs//Hy7P+UlZH/MDAw/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAADAwMP9aWlr/m5yY/5ucmP+bnJj/8fLs//Hy7P+UlZH/MDAw/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAMDAw/zAwMP8wMDD/MDAw/zAwMP8wMDD/MDAw/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAA+B8AAMAHAADABwAAwAcAAIADAACAAwAAgAMAAIADAACAAwAAgAMAAIADAACAAwAAgAMAAMAH
-        AADgDwAA8B8AAA==
-</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Favicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Favicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

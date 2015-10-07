@@ -40,8 +40,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.allowKeylogging = new System.Windows.Forms.CheckBox();
+            this.unlockShortcutTextbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.portTextBox = new System.Windows.Forms.NumericUpDown();
             this.allowScreenshots = new System.Windows.Forms.CheckBox();
@@ -50,6 +54,8 @@
             this.startStopButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
             this.viewLogButton = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.portTextBox)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +64,9 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.allowKeylogging);
+            this.groupBox1.Controls.Add(this.unlockShortcutTextbox);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.portTextBox);
             this.groupBox1.Controls.Add(this.allowScreenshots);
@@ -69,16 +77,37 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Options";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(288, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(84, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Unlock Shortcut";
+            this.toolTip1.SetToolTip(this.label3, "The keyboard shortcut used to unlock the server when activated via the notify ico" +
+        "n.");
+            // 
             // allowKeylogging
             // 
             this.allowKeylogging.Enabled = false;
             this.allowKeylogging.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.allowKeylogging.Location = new System.Drawing.Point(15, 49);
             this.allowKeylogging.Name = "allowKeylogging";
-            this.allowKeylogging.Size = new System.Drawing.Size(334, 24);
+            this.allowKeylogging.Size = new System.Drawing.Size(160, 24);
             this.allowKeylogging.TabIndex = 3;
             this.allowKeylogging.Text = "Enable Keylogging";
             this.allowKeylogging.UseVisualStyleBackColor = true;
+            // 
+            // unlockShortcutTextbox
+            // 
+            this.unlockShortcutTextbox.Location = new System.Drawing.Point(291, 49);
+            this.unlockShortcutTextbox.Name = "unlockShortcutTextbox";
+            this.unlockShortcutTextbox.Size = new System.Drawing.Size(100, 20);
+            this.unlockShortcutTextbox.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.unlockShortcutTextbox, "The keyboard shortcut used to unlock the server when activated via the notify ico" +
+        "n.");
+            this.unlockShortcutTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.unlockShortcutTextbox_KeyDown);
             // 
             // label1
             // 
@@ -182,6 +211,12 @@
             this.viewLogButton.UseVisualStyleBackColor = true;
             this.viewLogButton.Click += new System.EventHandler(this.ViewLogButtonClick);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "taskbarIcon";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,11 +229,14 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Skynet Server";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.portTextBox)).EndInit();
@@ -206,5 +244,9 @@
             this.PerformLayout();
 
         }
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox unlockShortcutTextbox;
+        public System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

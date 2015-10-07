@@ -17,12 +17,15 @@ namespace Skynet_Server
 		public int LocalServerPort { get; set; }
 		public bool AllowScreenshots {get;set;}
 		public bool AllowKeylogging {get;set;}
+        public Keys Keydata { get; set; }
 		
 		public SkynetServerSettings()
 		{
 			LocalServerPort = 4649;
 			AllowScreenshots = true;
 			AllowKeylogging = false;
+            //Keydata = "L, Control, Shift";
+            Keydata = (Keys.L | Keys.Control | Keys.Shift);
 		}
 	}
 	

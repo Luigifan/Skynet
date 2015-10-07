@@ -18,13 +18,26 @@ namespace Skynet_Server
 		public static void Main(string[] args)
 		{
 			Log = new ServerLog();
-			
-			Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new MainForm());
-			//SkynetServer s = new SkynetServer();
-			//s.Start();
-			//System.Windows.Forms.Application.Run();
+
+            if (args.Length > 0)
+            {
+                if(args[0].ToLower().Trim() == "--silent")
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+
+                    Log.Insert(DateTime.Now.ToString(), "Running server in silent mode");
+                    MainForm m = new MainForm();
+                    m.ToggleServer();
+                    Application.Run();
+                }
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm());
+            }
 		}
 	}
 }

