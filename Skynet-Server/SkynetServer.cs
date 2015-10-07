@@ -18,6 +18,7 @@ namespace Skynet_Server
 		}
 		protected override void OnMessage (MessageEventArgs e)
 		{
+            Log.Debug(e.Data);
 			if(e.Data == "GETSHOT")
 			{
 				if(SkynetServer.SettingsCopy != null && SkynetServer.SettingsCopy.AllowScreenshots)

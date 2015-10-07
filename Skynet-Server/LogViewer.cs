@@ -32,6 +32,7 @@ namespace Skynet_Server
 		
 		public void UpdateLogInUI()
 		{
+            listView1.BeginUpdate();
 			List<KeyValuePair<string, string>> log = Program.Log.Copy();
 			
 			listView1.Clear();
@@ -43,6 +44,10 @@ namespace Skynet_Server
 				lvi.SubItems.Add(item.Value);
 				listView1.Items.Add(lvi);
 			}
-		}
+            if(listView1.Items.Count > 0)
+                listView1.Items[listView1.Items.Count == 0 ? 0 : listView1.Items.Count - 1].EnsureVisible();
+
+            listView1.EndUpdate();
+        }
 	}
 }
