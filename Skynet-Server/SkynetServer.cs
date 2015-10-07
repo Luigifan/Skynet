@@ -8,11 +8,10 @@ namespace Skynet_Server
 {
 	public class Laputa : WebSocketBehavior
 	{
-		public Laputa()
+        SystemInformationLibrary.SystemSpecs.SystemSpecifications s = new SystemInformationLibrary.SystemSpecs.SystemSpecifications();
+        public Laputa()
 		{
-			
 		}
-		
 		protected override void OnMessage (MessageEventArgs e)
 		{
 			if(e.Data == "GETSHOT")
@@ -43,6 +42,21 @@ namespace Skynet_Server
 					Send(msg);
 				}
 			}
+            else if(e.Data == "GETINFO")
+            {
+                string msg = JsonConvert.SerializeObject(new
+                {
+                    type = "sysinfo",
+                    os = s.OperatingSystem,
+                    cpu = s.Processor,
+                    gpu = s.VideoCard,
+                    ram = s.TotalRAMAvailable,
+                    timestamp = DateTime.Now
+                });
+                Program.Log.Insert(DateTime.Now.ToString(),
+                                       "Responding to " + e.Data);
+                Send(msg);
+            }
 		}
 	}
 	

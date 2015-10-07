@@ -36,12 +36,34 @@ namespace Skynet
 		/// </summary>
 		private void InitializeComponent()
 		{
-			// 
-			// MainForm
-			// 
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Text = "Skynet";
-			this.Name = "MainForm";
+            this.viewportPictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.viewportPictureBox)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // viewportPictureBox
+            // 
+            this.viewportPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewportPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.viewportPictureBox.Name = "viewportPictureBox";
+            this.viewportPictureBox.Size = new System.Drawing.Size(772, 472);
+            this.viewportPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.viewportPictureBox.TabIndex = 0;
+            this.viewportPictureBox.TabStop = false;
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(772, 472);
+            this.Controls.Add(this.viewportPictureBox);
+            this.Name = "MainForm";
+            this.Text = "Skynet - View of ";
+            ((System.ComponentModel.ISupportInitialize)(this.viewportPictureBox)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
 		}
-	}
+
+        private System.Windows.Forms.PictureBox viewportPictureBox;
+    }
 }

@@ -31,33 +31,9 @@ namespace Skynet
         [STAThread]
         private static void Main(string[] args)
 		{
-			//Application.EnableVisualStyles();
-			//Application.SetCompatibleTextRenderingDefault(false);
-			//Application.Run(new MainForm());
-			
-				ws.OnMessage += (sender, e) => 
-				{
-					if(e.Type == Opcode.Text)
-					{
-						string data = e.Data;
-						//Console.WriteLine(e.Data);
-						JObject json = JObject.Parse(e.Data);
-						Conversions.FromBase64(json["image"].ToString()).Save("test" + counter + ".png");
-					}
-				};
-				
-				ws.Connect();
-
-            do
-            {
-                Console.WriteLine("<- GETSHOT ({0})", counter);
-                ws.Send("GETSHOT");
-                counter++;
-                Thread.Sleep(5000);
-                
-            } while (counter < 100);
-
-            Console.ReadLine();
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new ConnectForm());
 		}
 		
 	}
