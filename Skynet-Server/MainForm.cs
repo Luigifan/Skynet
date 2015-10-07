@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,21 +9,24 @@ namespace Skynet_Server
     {
         private SkynetServer SkynetServer = new SkynetServer();
         public SkynetServerSettings serverSettings = new SkynetServerSettings();
-        public bool RunSilence { get; internal set; }
 
         public MainForm()
         {
             Font = SystemFonts.MessageBoxFont;
             InitializeComponent();
             unlockShortcutTextbox.Text = serverSettings.Keydata.ToString();
-            if(RunSilence)
-            {
-                this.Visible = false;
-                notifyIcon1.Icon = Properties.Resources.Favicon;
-                notifyIcon1.Text = "Skynet";
-                notifyIcon1.Visible = true;
-            }
         }
+
+        public void RunSilent()
+        {
+            this.Visible = false;
+            notifyIcon1.Icon = Properties.Resources.Favicon;
+            notifyIcon1.Text = "Skynet";
+            notifyIcon1.Visible = true;
+
+            ToggleServer();
+        }
+
         void StartStopButtonClick(object sender, EventArgs e)
         {
             ToggleServer();
@@ -34,6 +38,13 @@ namespace Skynet_Server
             allowScreenshots.Enabled = state;
             portTextBox.Enabled = state;
             unlockShortcutTextbox.Enabled = state;
+        }
+
+        public void SendNotice(string text, int timeout)
+        {
+            notifyIcon1.BalloonTipTitle = "Skynet";
+            notifyIcon1.BalloonTipText = text;
+            notifyIcon1.ShowBalloonTip(timeout);
         }
 
         public void ToggleServer()
@@ -54,18 +65,22 @@ namespace Skynet_Server
                 SkynetServer.StartedServer += () =>
                 {
                     serverStatusLabel.ForeColor = Color.Green;
-                    serverStatusLabel.Text = "Server started! Point Skynet Client to: ws://localhost:" + SkynetServer.SettingsCopy.LocalServerPort + "/Skynet";
-                    Program.Log.Insert(DateTime.Now.ToString(), "Server started; running on: ws://localhost:" + SkynetServer.SettingsCopy.LocalServerPort + "/Skynet");
+                    serverStatusLabel.Text = "Server started! Point Skynet Client to: ws://" + SkynetServer.LocalIPAddress().ToString() + ":" + SkynetServer.SettingsCopy.LocalServerPort + "/Skynet";
+                    Program.Log.Insert(DateTime.Now.ToString(), "Server started; running on: ws://" + SkynetServer.LocalIPAddress().ToString() + ":" + SkynetServer.SettingsCopy.LocalServerPort + "/Skynet");
                 };
 
                 serverStatusLabel.ForeColor = Color.Green;
                 serverStatusLabel.Text = "Server running!";
                 SkynetServer.Start();
                 startStopButton.Text = "Stop";
+
+                SetControlState(false);
             }
             else
             {
                 Program.Log.Insert(DateTime.Now.ToString(), "Stopping server...");
+
+                SetControlState(true);
 
                 SkynetServer.Stop(WebSocketSharp.CloseStatusCode.Normal, "UI Asked to close");
                 serverStatusLabel.ForeColor = Color.Red;
@@ -89,17 +104,38 @@ namespace Skynet_Server
         }
         private void exitButton_Click(object sender, EventArgs e)
         {
-            if (SkynetServer.ServerRunning)
+            if (exitButton.Text.ToLower().Trim() == "exit")
             {
-                DialogResult dr = MessageBox.Show("Server still running, are you sure you want to quit?", "Skynet Server Still Running", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
+                if (SkynetServer.ServerRunning)
                 {
-                    SkynetServer.Stop(WebSocketSharp.CloseStatusCode.Normal, "Program shutting down.");
-                    Environment.Exit(0);
+                    DialogResult dr = MessageBox.Show("Server still running, are you sure you want to quit?", "Skynet Server Still Running", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        SkynetServer.Stop(WebSocketSharp.CloseStatusCode.Normal, "Program shutting down.");
+                        Environment.Exit(0);
+                    }
                 }
+                else
+                    Environment.Exit(0);
             }
             else
-                Environment.Exit(0);
+            {
+                RegistryKey rk = Registry.CurrentUser.OpenSubKey
+            ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+                if(rk.GetValue("Skynet Server") == null)
+                {
+                    rk.SetValue("Skynet Server", Application.ExecutablePath.ToString() + " --silent");
+                    MessageBox.Show("Added to startup!");
+                }
+                else
+                {
+                    rk.DeleteValue("Skynet Server", false);
+                    MessageBox.Show("Removed from startup!");
+                }
+
+                exitButton.Text = "Exit";
+            }
         }
 
         private void unlockShortcutTextbox_KeyDown(object sender, KeyEventArgs e)
@@ -125,6 +161,26 @@ namespace Skynet_Server
         {
             UnlockForm f = new UnlockForm(this);
             f.ShowDialog();
+        }
+        
+        private void MainForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Alt)
+            {
+                exitButton.Text = "Add to Startup";
+            }
+            else
+                exitButton.Text = "Exit";
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt)
+            {
+                exitButton.Text = "Add to Startup";
+            }
+            else
+                exitButton.Text = "Exit";
         }
     }
 }

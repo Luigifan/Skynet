@@ -14,6 +14,7 @@ namespace Skynet_Server
 	class Program
 	{
 		public static ServerLog Log {get; internal set;}
+        public static MainForm mainForm;
 		
 		public static void Main(string[] args)
 		{
@@ -27,16 +28,24 @@ namespace Skynet_Server
                     Application.SetCompatibleTextRenderingDefault(false);
 
                     Log.Insert(DateTime.Now.ToString(), "Running server in silent mode");
-                    MainForm m = new MainForm();
-                    m.ToggleServer();
+                    mainForm = new MainForm();
+                    mainForm.RunSilent();
                     Application.Run();
+                }
+                else
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    mainForm = new MainForm();
+                    Application.Run(mainForm);
                 }
             }
             else
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MainForm());
+                mainForm = new MainForm();
+                Application.Run(mainForm);
             }
 		}
 	}

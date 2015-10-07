@@ -1,7 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-# SharpDevelop 5.1
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet-Client", "Skynet\Skynet-Client.csproj", "{356C9860-1B7E-4897-9F82-53C59B879347}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skynet-Server", "Skynet-Server\Skynet-Server.csproj", "{8048B9B9-AB43-4552-BC0A-29D06F230A6B}"
@@ -14,11 +15,14 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{356C9860-1B7E-4897-9F82-53C59B879347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{356C9860-1B7E-4897-9F82-53C59B879347}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{356C9860-1B7E-4897-9F82-53C59B879347}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{356C9860-1B7E-4897-9F82-53C59B879347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{356C9860-1B7E-4897-9F82-53C59B879347}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{356C9860-1B7E-4897-9F82-53C59B879347}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{8048B9B9-AB43-4552-BC0A-29D06F230A6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8048B9B9-AB43-4552-BC0A-29D06F230A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8048B9B9-AB43-4552-BC0A-29D06F230A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8048B9B9-AB43-4552-BC0A-29D06F230A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

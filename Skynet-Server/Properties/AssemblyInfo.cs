@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Skynet-Server")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Skynet Server")]
+[assembly: AssemblyDescription("Server end of Skynet")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Mike Santiago")]
 [assembly: AssemblyProduct("Skynet-Server")]
 [assembly: AssemblyCopyright("Copyright 2015")]
 [assembly: AssemblyTrademark("")]

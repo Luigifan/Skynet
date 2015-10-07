@@ -35,7 +35,9 @@ namespace Skynet_Server
                     textBox1.Text = "Approved!";
                     textBox1.ForeColor = Color.Green;
 
-                    Thread.Sleep(2500);
+                    textBox1.Update();
+
+                    Thread.Sleep(1300);
                     this.Hide();
                     _parent.Show();
                     _parent.notifyIcon1.Visible = false;

@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Skynet.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LastConnected" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ws://localhost:4649/Skynet</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -20,6 +20,7 @@ namespace Skynet_Server
 	{
 		public LogViewer()
 		{
+            CheckForIllegalCrossThreadCalls = false;
 			InitializeComponent();
 			Program.Log.LogUpdated += UpdateLogInUI;
 			listView1.Clear();
