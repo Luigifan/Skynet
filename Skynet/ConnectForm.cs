@@ -21,18 +21,29 @@ namespace Skynet
         }
 
         private void ConnectForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        {}
 
         private void connectButton_Click(object sender, EventArgs e)
         {
+            connectButton.Enabled = false;
+            connectButton.Text = "Connecting..";
+            connectButton.Update();
             if(addressTextBox.Text.Trim() != string.Empty)
             {
-                Progress p = new Progress(addressTextBox.Text);
+                //Progress p = new Progress(addressTextBox.Text);
+                MainForm m = new MainForm(addressTextBox.Text.Trim());
                 settings.LastConnected = addressTextBox.Text;
                 settings.Save();
+                m.ConnectToWebSocket();
                 this.Hide();
+                if (m.IsDisposed)
+                {
+                    this.Show();
+                    connectButton.Enabled = true;
+                    connectButton.Text = "Connect";
+                }
+                else
+                    m.Show();
             }
         }
     }
